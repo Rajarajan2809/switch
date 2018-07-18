@@ -474,9 +474,9 @@ void setup()
 		password = eepromRead(21,41);
 		if((ip.length() != 0) && (password.length() != 0))
 		{
-		      Serial.println("ssid:"+ssid);
-		      Serial.println("password:"+password);
-		      WiFi.begin(ssid.c_str(), password.c_str());
+			Serial.println("ssid:"+ssid);
+			Serial.println("password:"+password);
+			WiFi.begin(ssid.c_str(), password.c_str());
 		}
 
 		ip = eepromRead(41,61);
