@@ -488,7 +488,7 @@ void setup()
 			Serial.println(WiFi.localIP());
 			String ip = ipToString(WiFi.localIP()),mask="255.255.255.0",gateway;
 			gateway = ipDivide(ip,0)+"."+ipDivide(ip,1)+"."+ipDivide(ip,2)+".1";
-			eepromStore("Gemicates",1,21);
+			eepromStore(WiFi.SSID(),1,21);
 			eepromStore("admin@123",21,41);
 			eepromStore(ip,41,61);
 			eepromStore(mask,61,81);
