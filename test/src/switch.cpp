@@ -277,14 +277,16 @@ void launchWeb(int webtype)
 
 bool softSwitch()
 {
-	//switch gpio0
+	//switch 1 gpio0
 	if (digitalRead(0) == HIGH)
 	{
 		if(butSta0 == LOW)
 		{
 			//Condition for 0 ON
 			butSta0 = HIGH;
-			Serial.println("0 is low");
+			Serial.println("0(s1) is HIGH");
+			digitalWrite(9, LOW);
+			Serial.println("9(r1) is LOW");
 			//curl(host,jsonCons("Control","0","0"));
 		}
 	}
@@ -294,12 +296,14 @@ bool softSwitch()
 		{
 			//Condition for S0 OFF
 			butSta0 = LOW;
-			Serial.println("0 is high");
-			curl(host,jsonCons("Control","0","255"));
+			Serial.println("0(s1) is LOW");
+			digitalWrite(9, HIGH);
+			Serial.println("9(r1) is HIGH");
+			//curl(host,jsonCons("Control","0","255"));
 		}
 	}
 
-	//switch gpio2
+	//switch 2 gpio2
 	if (digitalRead(2) == HIGH)
 	{
 		if(butSta2 == LOW)
@@ -307,8 +311,10 @@ bool softSwitch()
 			//Condition for 2 ON
 			butSta2 = HIGH;
 			//switch gpio2
-			Serial.println("2 is low");
-			curl(host,jsonCons("Control","2","0"));
+			Serial.println("2(s2) is HIGH");
+			digitalWrite(10, LOW);
+			Serial.println("10(r2) is LOW");
+			//curl(host,jsonCons("Control","2","0"));
 		}
 	}
 	else if (digitalRead(2) == LOW)
@@ -317,21 +323,24 @@ bool softSwitch()
 		{
 			//Condition for 2 OFF
 			butSta2 = LOW;
-			Serial.println("2 is high");
-			jsonCons("Control","2","255");
-			curl(host,jsonCons("Control","2","255"));
+			Serial.println("2(s2) is LOW");
+			digitalWrite(10, HIGH);
+			Serial.println("10(r2) is HIGH");
+			//curl(host,jsonCons("Control","2","255"));
 		}
 	}
 
-	//switch gpio4
+	//switch 3 gpio4
 	if (digitalRead(4) == HIGH)
 	{
 		if(butSta4 == LOW)
 		{
 			//Condition for 4 ON
 			butSta4 = HIGH;
-			Serial.println("4 is low");
-			curl(host,jsonCons("Control","4","0"));
+			Serial.println("4(s3) is HIGH");
+			digitalWrite(12, LOW);
+			Serial.println("12(r3) is LOW");
+			//curl(host,jsonCons("Control","4","0"));
 		}
 	}
 	else if (digitalRead(4) == LOW)
@@ -340,20 +349,24 @@ bool softSwitch()
 		{
 			//Condition for 4 OFF
 			butSta4 = LOW;
-			Serial.println("4 is high");
-			curl(host,jsonCons("Control","2","255"));
+			Serial.println("4(s3) is LOW");
+			digitalWrite(12, LOW);
+			Serial.println("12(r3) is HIGH");
+			//curl(host,jsonCons("Control","2","255"));
 		}
 	}
 
-	//switch gpio5
+	//switch 4 gpio5
 	if (digitalRead(5) == HIGH)
 	{
 		if(butSta5 == LOW)
 		{
 			//Condition for 5 ON
 			butSta5 = HIGH;
-			Serial.println("5 is low");
-			curl(host,jsonCons("Control","5","0"));
+			Serial.println("5(s4) is HIGH");
+			digitalWrite(14, LOW);
+			Serial.println("14(r4) is LOW");
+			//curl(host,jsonCons("Control","5","0"));
 		}
 	}
 	else if (digitalRead(5) == LOW)
@@ -362,8 +375,10 @@ bool softSwitch()
 		{
 			//Condition for 5 OFF
 			butSta5 = LOW;
-			Serial.println("5 is high");
-			curl(host,jsonCons("Control","5","255"));
+			Serial.println("5(s4) is LOW");
+			digitalWrite(14, HIGH);
+			Serial.println("14(r4) is HIGH");
+			//curl(host,jsonCons("Control","5","255"));
 		}
 	}
     return 0;
