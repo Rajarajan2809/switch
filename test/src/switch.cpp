@@ -34,9 +34,8 @@ ESP8266WiFiMulti wifiMulti;
 	D5 -> 14 -> GPIO14 //relay3
 	D8 -> 15 -> GPIO15 //relay4
 	D0 -> 16 -> GPIO16 //relay5
+	
 
-	D3 -> 0 -> GPIO0 //reset and other funs
-	SD2 -> 9 -> GPIO9 //reset and other funs
 	SD3 -> 10 -> GPIO10 //reset and other funs
 */
 //Button state
