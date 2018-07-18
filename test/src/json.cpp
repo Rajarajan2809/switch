@@ -14,6 +14,68 @@ bool jsonParse(String json)
 	String type = jsonStruct["type"];
 	String id = jsonStruct["id"];
 	String value = jsonStruct["value"];
+
+	//relay gpio9
+	if (id == "1")
+	{
+		if(value == "0")
+		{
+			//Condition for 9 OFF
+			digitalWrite(9, LOW);
+			Serial.println("9 is low");
+		}
+		else if(value == "100")
+		{
+			digitalWrite(9, HIGH);
+			Serial.println("9 is high");
+		}
+	}
+	//relay gpio10
+	else if (id == "2")
+	{
+		if(value == "0")
+		{
+			//Condition for 10 OFF
+			digitalWrite(10, LOW);
+			Serial.println("10 is low");
+		}
+		else if(value == "100")
+		{
+			digitalWrite(10, HIGH);
+			Serial.println("10 is high");
+		}
+	}
+	//relay gpio12
+	else if (id == "3")
+	{
+		if(value == "0")
+		{
+			//Condition for 9 ON
+			digitalWrite(12, LOW);
+			Serial.println("12 is low");
+		}
+		else if(value == "100")
+		{
+			digitalWrite(12, HIGH);
+			Serial.println("12 is high");
+		}
+	}
+	//relay gpio14
+	else if (id == "4")
+	{
+		if(value == "0")
+		{
+			//Condition for 14 OFF
+			digitalWrite(14, LOW);
+			Serial.println("14 is low");
+		}
+		else if(value == "100")
+		{
+			digitalWrite(14, HIGH);
+			Serial.println("14 is high");
+		}
+	}
+
 	return 1;
 }
 

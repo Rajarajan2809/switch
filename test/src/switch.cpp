@@ -23,28 +23,33 @@ unsigned long previousMillis = millis();
 	1 -> GPIO1#include <ESP8266WiFiMulti.h>
 
 ESP8266WiFiMulti wifiMulti;
-	2 -> GPIO2
-	3 -> GPIO3
-	5 -> GPIO5
-	6 -> GPIO4
-	9 -> GPIO9
-	10 -> GPIO10
-	12 -> GPIO12
-	13 -> GPIO13
-	14 -> GPIO14
-	15 -> GPIO15
-	16 -> GPIO16
-*/
+	TX -> 1 -> GPIO1 //switch1
+	D4 -> 2 -> GPIO2 //switch2
+	RX -> 3 -> GPIO3 //switch3
+	D1 -> 5 -> GPIO5 //switch4
+	D2 -> 4 -> GPIO4 //switch5
 
+	D6 -> 12 -> GPIO12 //relay1
+	D7 -> 13 -> GPIO13 //relay2
+	D5 -> 14 -> GPIO14 //relay3
+	D8 -> 15 -> GPIO15 //relay4
+	D0 -> 16 -> GPIO16 //relay5
+
+	D3 -> 0 -> GPIO0 //reset and other funs
+	SD2 -> 9 -> GPIO9 //reset and other funs
+	SD3 -> 10 -> GPIO10 //reset and other funs
+*/
 //Button state
+
 boolean butSta0 = HIGH;
 boolean butSta2 = HIGH;
 boolean butSta4 = HIGH;
 boolean butSta5 = HIGH;
-boolean butSta9 = HIGH;
-boolean butSta10 = HIGH;
-boolean butSta12 = HIGH;
-boolean butSta14 = HIGH;
+
+// boolean butSta9 = HIGH;
+// boolean butSta10 = HIGH;
+// boolean butSta12 = HIGH;
+// boolean butSta14 = HIGH;
 
 // function to create web server
 void createWebServer(int webtype)
@@ -280,7 +285,7 @@ bool softSwitch()
 			//Condition for 0 ON
 			butSta0 = HIGH;
 			Serial.println("0 is low");
-			curl(host,jsonCons("Control","0","0"));
+			//curl(host,jsonCons("Control","0","0"));
 		}
 	}
 	else if (digitalRead(0) == LOW)
@@ -361,107 +366,23 @@ bool softSwitch()
 			curl(host,jsonCons("Control","5","255"));
 		}
 	}
-
-	//switch gpio9
-	if (digitalRead(9) == HIGH)
-	{
-		if(butSta9 == LOW)
-		{
-			//Condition for 9 ON
-			butSta9 = HIGH;
-			Serial.println("9 is low");
-			curl(host,jsonCons("Control","9","0"));
-		}
-	}
-	else if (digitalRead(9) == LOW)
-	{
-		if(butSta9 == HIGH)
-		{
-			//Condition for 9 OFF
-			butSta9 = LOW;
-			Serial.println("9 is high");
-			curl(host,jsonCons("Control","9","255"));
-		}
-	}
-
-	//switch gpio10
-	if (digitalRead(10) == HIGH)
-	{
-		if(butSta10 == LOW)
-		{
-			//Condition for 10 ON
-			butSta10 = HIGH;
-			Serial.println("10 is low");
-			curl(host,jsonCons("Control","10","0"));
-		}
-	}
-	else if (digitalRead(10) == LOW)
-	{
-		if(butSta10 == HIGH)
-		{
-			//Condition for 10 OFF
-			butSta10 = LOW;
-			Serial.println("10 is high");
-			curl(host,jsonCons("Control","10","255"));
-		}
-	}
-
-	//switch gpio12
-	if (digitalRead(12) == HIGH)
-	{
-		if(butSta12 == LOW)
-		{
-			//Condition for 12 ON
-			butSta12 = HIGH;
-			Serial.println("12 is low");
-			curl(host,jsonCons("Control","12","0"));
-		}
-	}
-	else if (digitalRead(12) == LOW)
-	{
-		if(butSta12 == HIGH)
-		{
-			//Condition for 12 OFF
-			butSta12 = LOW;
-			Serial.println("12 is high");
-			curl(host,jsonCons("Control","12","255"));
-		}
-	}
-
-	//switch gpio14
-	if (digitalRead(14) == HIGH)
-	{
-		if(butSta14 == LOW)
-		{
-			//Condition for 14 ON
-			butSta14 = HIGH;
-			Serial.println("14 is low");
-			curl(host,jsonCons("Control","14","0"));
-		}
-	}
-	else if (digitalRead(14) == LOW)
-	{
-		if(butSta14 == HIGH)
-		{
-			//Condition for 14 OFF
-			butSta14 = LOW;
-			curl(host,jsonCons("Control","14","255"));
-		}
-	}
     return 0;
 }
 
 //function to initiate settings
 void setup()
 {
+	//switch
 	pinMode(0, INPUT_PULLUP);
 	pinMode(2, INPUT_PULLUP);
 	pinMode(4, INPUT_PULLUP);
 	pinMode(5, INPUT_PULLUP);
-	pinMode(9, INPUT_PULLUP);
-	pinMode(10, INPUT_PULLUP);
-	pinMode(12, INPUT_PULLUP);
-	pinMode(14, INPUT_PULLUP);
+
+	//relay
+	pinMode(9, OUTPUT);
+	pinMode(10, OUTPUT);
+	pinMode(12, OUTPUT);
+	pinMode(14, OUTPUT);
 
 	Serial.begin(19200);
 	delay(3000);
